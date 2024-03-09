@@ -1,0 +1,45 @@
+{
+	"env": {
+		"node": true,
+		"browser": true,
+		"commonjs": true,
+		"es2021": true,
+		"jest": true
+	},
+	"extends": [
+		// "prettier",
+		"eslint:recommended"
+		// "plugin:prettier/recommended"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": 12,
+		"project": "./tsconfig.dev.json"
+	},
+	"plugins": [
+		"prettier",
+		"@typescript-eslint"
+	],
+	"rules": {
+		"prettier/prettier": [
+			"warn"
+		],
+		"require-await": "error",
+		"no-unreachable": "off",
+		"@typescript-eslint/no-floating-promises": [
+			"error"
+		],
+		"lines-between-class-members": [
+			// 0 = off, 1 = warn, 2 = error
+			1,
+			"always"
+		],
+		"comma-dangle": 0,
+		"padded-blocks": [
+			"off",
+			{
+				"classes": "always"
+			}
+		]
+	}
+}
