@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -49,10 +40,8 @@ class Helper {
     /**
      * @param {number} milliseconds - the number of milliseconds to wait.
      */
-    waitForTimeout(milliseconds) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield new Promise((r) => setTimeout(r, milliseconds));
-        });
+    async waitForTimeout(milliseconds) {
+        await new Promise((r) => setTimeout(r, milliseconds));
     }
     /**
      * This function calculates the difference in hours between the pastTime parameter and the current datetime.
@@ -122,13 +111,11 @@ class Helper {
      * @param callbackfn  should be a function that returns a Promise
      * @returns
      */
-    filterAsync(array, 
+    async filterAsync(array, 
     // eslint-disable-next-line no-unused-vars
     callbackfn) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const filterMap = yield this.mapAsync(array, callbackfn);
-            return array.filter((_, index) => filterMap[index]);
-        });
+        const filterMap = await this.mapAsync(array, callbackfn);
+        return array.filter((_, index) => filterMap[index]);
     }
     /**
      *
@@ -168,16 +155,14 @@ class Helper {
             throw `FIXME: Helper.extractHorasFromString: En la string timeStr no s'ha trobat 'hora'. Input timeStr = ${timeStr}`;
         }
     }
-    getIp() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const { stdout, stderr } = yield exec(`curl checkip.amazonaws.com`);
-            if (!stdout) {
-                console.error("IP no trobada a amazon");
-                console.error(stderr);
-                return "";
-            }
-            return stdout.trim();
-        });
+    async getIp() {
+        const { stdout, stderr } = await exec(`curl checkip.amazonaws.com`);
+        if (!stdout) {
+            console.error("IP no trobada a amazon");
+            console.error(stderr);
+            return "";
+        }
+        return stdout.trim();
     }
     /*****************************************/
     /* BEGIN I/O FUNCTIONS TO THE FILESYSTEM */
@@ -187,27 +172,23 @@ class Helper {
      * @param {string} date
      * @param {PathLike} ipFilePath the file where to save it
      */
-    writeIPToFile(ip, date, ipFilePath) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield fs_1.promises.appendFile(ipFilePath, `Data: ${date}\nIP: ${ip}\n\n`);
-            }
-            catch (err) {
-                console.error(`cannot write to file ${ipFilePath}. Error: ${err}`);
-                throw Error(`cannot write to file ${ipFilePath}. Error: ${err}`);
-            }
-        });
+    async writeIPToFile(ip, date, ipFilePath) {
+        try {
+            await fs_1.promises.appendFile(ipFilePath, `Data: ${date}\nIP: ${ip}\n\n`);
+        }
+        catch (err) {
+            console.error(`cannot write to file ${ipFilePath}. Error: ${err}`);
+            throw Error(`cannot write to file ${ipFilePath}. Error: ${err}`);
+        }
     }
     /**
      *
      * @param {string} filename
      * @param {string} content
      */
-    writeFile(filename, content) {
-        return __awaiter(this, void 0, void 0, function* () {
-            // noinspection UnnecessaryLocalVariableJS
-            yield fs_1.promises.writeFile(filename, content);
-        });
+    async writeFile(filename, content) {
+        // noinspection UnnecessaryLocalVariableJS
+        await fs_1.promises.writeFile(filename, content);
     }
     /**
      * Will write the text to the filename. Newlines should be explicitly set.
@@ -215,27 +196,21 @@ class Helper {
      * @param {string} text text to write
      * @returns
      */
-    appendFile(filename, text) {
-        return __awaiter(this, void 0, void 0, function* () {
-            // noinspection UnnecessaryLocalVariableJS
-            yield fs_1.promises.appendFile(filename, text, "utf-8");
-        });
+    async appendFile(filename, text) {
+        // noinspection UnnecessaryLocalVariableJS
+        await fs_1.promises.appendFile(filename, text, "utf-8");
     }
     /**
      * @param {string} filename
      * @returns {Promise<string>} the content of the file
      */
-    readFile(filename) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const encoding = "utf-8";
-            const buffer = yield fs_1.promises.readFile(filename, { encoding });
-            return buffer.toString();
-        });
+    async readFile(filename) {
+        const encoding = "utf-8";
+        const buffer = await fs_1.promises.readFile(filename, { encoding });
+        return buffer.toString();
     }
-    emptyFile(filename) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield this.writeFile(filename, "");
-        });
+    async emptyFile(filename) {
+        return await this.writeFile(filename, "");
     }
     /**
      * @param {string} filePath - The path to the JSON file to load.
@@ -251,41 +226,37 @@ class Helper {
             (0, fs_1.mkdirSync)(dir, { recursive: true });
         }
     }
-    rmFileIfExists(file) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield fs_1.promises.stat(file);
-                // console.log(`removing ${file}`);
-                yield fs_1.promises.unlink(file);
+    async rmFileIfExists(file) {
+        try {
+            await fs_1.promises.stat(file);
+            // console.log(`removing ${file}`);
+            await fs_1.promises.unlink(file);
+        }
+        catch (err) {
+            if (err.code === "ENOENT") {
+                // console.error(`The file ${file} does not exist`);
             }
-            catch (err) {
-                if (err.code === "ENOENT") {
-                    // console.error(`The file ${file} does not exist`);
-                }
-                else {
-                    throw err;
-                }
+            else {
+                throw err;
             }
-        });
+        }
     }
     /**
      * @param {string} jsonStr
      * @param basePath
      */
-    logJSONdebug(jsonStr_1) {
-        return __awaiter(this, arguments, void 0, function* (jsonStr, basePath = __dirname) {
-            const dir = (0, path_1.resolve)(basePath, `./logs/dataset`);
-            this.createDirIfNotExists(dir);
-            const filenameFullPath = (0, path_1.resolve)(dir, `data_${this.dateFormatForLog()}.json`);
-            try {
-                yield fs_1.promises.writeFile(filenameFullPath, jsonStr);
-                console.log(`file written successfully to ${filenameFullPath}`);
-                return filenameFullPath;
-            }
-            catch (err) {
-                console.error(`cannot write to file ${filenameFullPath}. Error: ${err}`);
-            }
-        });
+    async logJSONdebug(jsonStr, basePath = __dirname) {
+        const dir = (0, path_1.resolve)(basePath, `./logs/dataset`);
+        this.createDirIfNotExists(dir);
+        const filenameFullPath = (0, path_1.resolve)(dir, `data_${this.dateFormatForLog()}.json`);
+        try {
+            await fs_1.promises.writeFile(filenameFullPath, jsonStr);
+            console.log(`file written successfully to ${filenameFullPath}`);
+            return filenameFullPath;
+        }
+        catch (err) {
+            console.error(`cannot write to file ${filenameFullPath}. Error: ${err}`);
+        }
     }
     /***************************************/
     /* END I/O FUNCTIONS TO THE FILESYSTEM */
