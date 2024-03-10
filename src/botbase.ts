@@ -1,3 +1,4 @@
+// @ts-ignore
 import deepmerge from "deepmerge";
 // eslint-disable-next-line no-unused-vars
 import { Browser, Page } from "puppeteer";
