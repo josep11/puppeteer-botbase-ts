@@ -6,6 +6,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "NODE_ENV=test jest --testTimeout=50000 --runInBand tests/*",
+    "test:tdd": "NODE_ENV=test jest --bail --colors --detectOpenHandles --detectLeaks --runInBand",
+    "test:ci": "NODE_ENV=test jest --testPathIgnorePatterns \"tests/*botbase*\" \"tests/*helper-puppeteer*\" --detectLeaks --runInBand --reporters=default --reporters=jest-junit",
     "prebuild": "rm -rf dist/*",
     "build": "tsc -p tsconfig.base.json",
     "build-watch": "tsc --watch"

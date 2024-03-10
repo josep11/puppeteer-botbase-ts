@@ -9,9 +9,9 @@ export * from "./savers/screenshot-saver-interface";
 export * from "./savers/cookie-saver";
 export * from "./savers/cookie-saver-interface";
 
-// export * from "./puppeteer-utils";
-//
-// export * from "./botbase";
+export * from "./puppeteer-utils";
+
+export * from "./botbase";
 
 export * from "./browser-launcher";
 
