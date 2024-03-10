@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BotBase = void 0;
+// @ts-ignore
 const deepmerge_1 = __importDefault(require("deepmerge"));
 // eslint-disable-next-line no-unused-vars
 const index_1 = require("./index");

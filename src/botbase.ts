@@ -25,7 +25,7 @@ const packageJsonPath = resolve("package.json");
 const pjson = helper.loadJson(packageJsonPath);
 
 export class BotBase {
-  private browser: Browser | null;
+  protected browser: Browser | null;
 
   page: Page | null;
 

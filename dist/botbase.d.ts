@@ -1,8 +1,8 @@
-import { Page } from "puppeteer";
+import { Browser, Page } from "puppeteer";
 import { BrowserLauncher, CookieSaverInterface, ScreenshotSaverInterface } from "./index";
 import BotBaseParams from "./types/BotBaseParams";
 export declare class BotBase {
-    private browser;
+    protected browser: Browser | null;
     page: Page | null;
     protected readonly basePath: string;
     protected mainUrl: string;
