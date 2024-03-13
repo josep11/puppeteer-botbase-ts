@@ -11,9 +11,6 @@ export declare class BotBase {
     protected browserLauncher: BrowserLauncher;
     protected config: any;
     protected chromiumExecutablePath: string | null;
-    /**
-     * @param {BotBaseParams} params
-     */
     constructor(params: BotBaseParams);
     validateParams(params: BotBaseParams): void;
     initialize(opts?: {}): Promise<void>;

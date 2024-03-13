@@ -15,9 +15,6 @@ const { waitForTimeout } = index_1.helper;
 const packageJsonPath = (0, path_1.resolve)("package.json");
 const pjson = index_1.helper.loadJson(packageJsonPath);
 class BotBase {
-    /**
-     * @param {BotBaseParams} params
-     */
     // @ts-ignore
     constructor(params) {
         this.validateParams(params);
