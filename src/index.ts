@@ -15,4 +15,4 @@ export * from "./botbase";
 
 export * from "./browser-launcher";
 
-// export * from "./src/utils";
+export * from "./utils";
