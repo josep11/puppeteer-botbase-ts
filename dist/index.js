@@ -24,4 +24,4 @@ __exportStar(require("./savers/cookie-saver-interface"), exports);
 __exportStar(require("./puppeteer-utils"), exports);
 __exportStar(require("./botbase"), exports);
 __exportStar(require("./browser-launcher"), exports);
-// export * from "./src/utils";
+__exportStar(require("./utils"), exports);

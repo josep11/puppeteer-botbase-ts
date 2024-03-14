@@ -43,9 +43,6 @@ export class BotBase {
 
   protected chromiumExecutablePath: string | null;
 
-  /**
-   * @param {BotBaseParams} params
-   */
   // @ts-ignore
   constructor(params: BotBaseParams) {
     this.validateParams(params);
