@@ -1,5 +1,5 @@
 import {ClientHttp2Session, connect} from "http2";
-
+import { existsSync, mkdirSync } from "fs";
 interface Options {
     authority?: string;
     timeout?: number;
@@ -28,4 +28,11 @@ export function isInternetAvailable(options: Options = {}): Promise<boolean> {
             client.destroy();
         });
     });
+}
+
+
+export function createDirIfNotExists(dir: string) {
+    if (!existsSync(dir)) {
+        mkdirSync(dir, { recursive: true });
+    }
 }

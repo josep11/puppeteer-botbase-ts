@@ -2,7 +2,7 @@ import { BrowserLauncher } from "../browser-launcher";
 import { ScreenshotSaverInterface } from "../savers/screenshot-saver-interface";
 import { CookieSaverInterface } from "../savers/cookie-saver-interface";
 
-class BotBaseParams {
+export class BotBaseParams {
   mainUrl: string;
 
   basePath: string;
