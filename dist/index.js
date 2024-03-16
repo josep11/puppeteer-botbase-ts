@@ -21,6 +21,7 @@ __exportStar(require("./savers/screenshot-saver"), exports);
 __exportStar(require("./savers/screenshot-saver-interface"), exports);
 __exportStar(require("./savers/cookie-saver"), exports);
 __exportStar(require("./savers/cookie-saver-interface"), exports);
+__exportStar(require("./types/BotBaseParams"), exports);
 __exportStar(require("./puppeteer-utils"), exports);
 __exportStar(require("./botbase"), exports);
 __exportStar(require("./browser-launcher"), exports);

@@ -4,4 +4,5 @@ interface Options {
     options?: any;
 }
 export declare function isInternetAvailable(options?: Options): Promise<boolean>;
+export declare function createDirIfNotExists(dir: string): void;
 export {};
