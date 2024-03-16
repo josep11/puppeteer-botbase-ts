@@ -7,7 +7,7 @@ import { Browser, Page } from "puppeteer";
 import {
   BrowserLauncher,
   CookieSaverInterface,
-  helper,
+  helper, LoginError,
   MyTimeoutError,
   NotImplementedError,
   objectArrayToCookieParamArray,
@@ -128,8 +128,10 @@ export class BotBase {
    * @throws {LoginError} when not logged it
    */
   // eslint-disable-next-line require-await
-  async verifyIsLoggedIn() {
-    throw new NotImplementedError("verifyIsLoggedIn not implemented");
+  async verifyIsLoggedIn(): Promise<void> {
+    if (!(await this.isLoggedIn())) {
+      throw new LoginError("Texts/cssSelectors for isLoggedIn not found");
+    }
   }
 
   /**

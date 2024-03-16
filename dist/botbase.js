@@ -87,7 +87,9 @@ class BotBase {
      */
     // eslint-disable-next-line require-await
     async verifyIsLoggedIn() {
-        throw new index_1.NotImplementedError("verifyIsLoggedIn not implemented");
+        if (!(await this.isLoggedIn())) {
+            throw new index_1.LoginError("Texts/cssSelectors for isLoggedIn not found");
+        }
     }
     /**
      * Implementation required
