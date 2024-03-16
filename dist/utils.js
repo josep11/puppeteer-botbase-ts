@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createDirIfNotExists = exports.isInternetAvailable = void 0;
+exports.writeJson = exports.createDirIfNotExists = exports.isInternetAvailable = void 0;
 const http2_1 = require("http2");
 const fs_1 = require("fs");
 function isInternetAvailable(options = {}) {
@@ -31,3 +31,8 @@ function createDirIfNotExists(dir) {
     }
 }
 exports.createDirIfNotExists = createDirIfNotExists;
+function writeJson(file, obj) {
+    const stringified = JSON.stringify(obj, null, 2);
+    return (0, fs_1.writeFileSync)(file, stringified);
+}
+exports.writeJson = writeJson;

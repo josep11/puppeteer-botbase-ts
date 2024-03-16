@@ -1,5 +1,5 @@
 import {ClientHttp2Session, connect} from "http2";
-import { existsSync, mkdirSync } from "fs";
+import {existsSync, mkdirSync, writeFileSync} from "fs";
 interface Options {
     authority?: string;
     timeout?: number;
@@ -35,4 +35,9 @@ export function createDirIfNotExists(dir: string) {
     if (!existsSync(dir)) {
         mkdirSync(dir, { recursive: true });
     }
+}
+
+export function writeJson(file: string, obj: object): void {
+    const stringified = JSON.stringify(obj, null, 2);
+    return writeFileSync(file, stringified);
 }
