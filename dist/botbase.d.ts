@@ -23,7 +23,12 @@ export declare class BotBase {
     /**
      * Implementation required
      */
-    isLoggedIn(): Promise<void>;
+    isLoggedIn(): Promise<boolean>;
+    /**
+     * Implementation required
+     * @throws {LoginError} when not logged it
+     */
+    verifyIsLoggedIn(): Promise<void>;
     /**
      * Implementation required
      */
@@ -34,14 +39,14 @@ export declare class BotBase {
     checkPage(): Page;
     /**
      * Tries to log in using cookies, or otherwise it throws error
-     * It depends on implementation of isLoggedIn()
+     * It depends on implementation of verifyIsLoggedIn()
      */
     loginWithSession(cookies: object[]): Promise<void>;
     /**
      * Tries to log in using cookies file (this.cookiesFile) and if unsuccessful it tries with credentials
      * throws MyTimeoutError, when unable to connect due to timeout or another Error for other ones
      * If login is ok it writes the cookies to the file, if it's not it deletes them
-     * Careful this function depends on implementation of isLoggedIn
+     * Careful this function depends on implementation of verifyIsLoggedIn
      */
     login(username: string, password: string): Promise<void>;
     /**

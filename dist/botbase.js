@@ -83,6 +83,14 @@ class BotBase {
     }
     /**
      * Implementation required
+     * @throws {LoginError} when not logged it
+     */
+    // eslint-disable-next-line require-await
+    async verifyIsLoggedIn() {
+        throw new index_1.NotImplementedError("verifyIsLoggedIn not implemented");
+    }
+    /**
+     * Implementation required
      */
     // eslint-disable-next-line no-unused-vars, require-await
     async loginWithCredentials(username, password) {
@@ -99,7 +107,7 @@ class BotBase {
     }
     /**
      * Tries to log in using cookies, or otherwise it throws error
-     * It depends on implementation of isLoggedIn()
+     * It depends on implementation of verifyIsLoggedIn()
      */
     async loginWithSession(cookies) {
         if (!this.mainUrl) {
@@ -110,9 +118,9 @@ class BotBase {
         await this.page.setCookie(...(0, index_1.objectArrayToCookieParamArray)(cookies));
         await this.page.goto(this.mainUrl, { waitUntil: "networkidle2" });
         await waitForTimeout(index_1.helper.getRandBetween(1500, 4000));
-        await this.isLoggedIn().catch(async (error) => {
+        await this.verifyIsLoggedIn().catch(async (error) => {
             console.error(`App is not logged into ${this.appName()}`);
-            await this.writeCookiesFile([]); //deteling cookies file
+            await this.writeCookiesFile([]); //deleting cookies file
             throw error;
         });
     }
@@ -120,7 +128,7 @@ class BotBase {
      * Tries to log in using cookies file (this.cookiesFile) and if unsuccessful it tries with credentials
      * throws MyTimeoutError, when unable to connect due to timeout or another Error for other ones
      * If login is ok it writes the cookies to the file, if it's not it deletes them
-     * Careful this function depends on implementation of isLoggedIn
+     * Careful this function depends on implementation of verifyIsLoggedIn
      */
     async login(username, password) {
         this.page = this.checkPage();
@@ -146,7 +154,7 @@ class BotBase {
             throw error;
         }
         try {
-            await this.isLoggedIn();
+            await this.verifyIsLoggedIn();
         }
         catch (error) {
             console.error(`App is not logged into ${this.appName()}`);
