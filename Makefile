@@ -46,7 +46,7 @@ tag/delete:
 
 ## Run update deps for all of them
 update-deps:
-	ncu -x chai -u && npm i && npm test
+	ncu -x chai -x eslint -u && npm i && npm test
 
 .PHONY: build prebuild
 
