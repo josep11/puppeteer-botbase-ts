@@ -4,6 +4,8 @@ import deepmerge from "deepmerge";
 import { Browser, Page } from "puppeteer";
 
 // eslint-disable-next-line no-unused-vars
+import { join, resolve } from "path";
+import { defaultConfig } from "./defaultConfig";
 import {
   BrowserLauncher,
   CookieSaverInterface,
@@ -15,8 +17,6 @@ import {
   semiRandomiseViewPort,
 } from "./index";
 import BotBaseParams from "./types/BotBaseParams";
-import { defaultConfig } from "./defaultConfig";
-import { resolve, join } from "path";
 
 const { waitForTimeout } = helper;
 

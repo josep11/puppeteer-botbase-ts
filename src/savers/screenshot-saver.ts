@@ -1,8 +1,8 @@
 import { dirname } from "path";
 
-import { ScreenshotSaverInterface } from "./screenshot-saver-interface";
-import { helper } from "../helper";
 import { writeFileSync } from "fs";
+import { helper } from "../helper";
+import { ScreenshotSaverInterface } from "./screenshot-saver-interface";
 
 export class ScreenshotSaver implements ScreenshotSaverInterface {
   private readonly screenshotBasepath: string;
@@ -32,12 +32,16 @@ export class ScreenshotSaver implements ScreenshotSaverInterface {
 
   // eslint-disable-next-line require-await
   async saveScreenshot(
-    imageBuffer: Buffer,
+    imageBuffer: Buffer | Uint8Array,
     type: string,
     filename = "default"
   ) {
     //check for errors
     this._checkType(type);
+
+    if (imageBuffer instanceof Uint8Array) {
+      imageBuffer = Buffer.from(imageBuffer);
+    }
 
     const screenshotLocation = `${this.screenshotBasepath}/${helper.dateFormatForLog()}_${filename}.${type}`;
     // console.log(`Saving screenshot "${filename}" at ${screenshotLocation}`);
