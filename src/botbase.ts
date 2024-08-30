@@ -1,15 +1,15 @@
 // @ts-ignore
 import deepmerge from "deepmerge";
-// eslint-disable-next-line no-unused-vars
+
 import { Browser, Page } from "puppeteer";
 
-// eslint-disable-next-line no-unused-vars
 import { join, resolve } from "path";
 import { defaultConfig } from "./defaultConfig";
 import {
   BrowserLauncher,
   CookieSaverInterface,
-  helper, LoginError,
+  helper,
+  LoginError,
   MyTimeoutError,
   NotImplementedError,
   objectArrayToCookieParamArray,
@@ -123,11 +123,12 @@ export class BotBase {
   async isLoggedIn(): Promise<boolean> {
     throw new NotImplementedError("isLoggedIn not implemented");
   }
+
   /**
    * Implementation required
    * @throws {LoginError} when not logged it
    */
-  // eslint-disable-next-line require-await
+
   async verifyIsLoggedIn(): Promise<void> {
     if (!(await this.isLoggedIn())) {
       throw new LoginError("Texts/cssSelectors for isLoggedIn not found");
@@ -310,7 +311,6 @@ export class BotBase {
    * @returns {string}
    */
   appName() {
-    // eslint-disable-next-line no-useless-escape
     return "SHOULD OVERRIDE ¯_(ツ)_/¯ SHOULD OVERRIDE";
   }
 }
