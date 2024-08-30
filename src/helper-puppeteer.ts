@@ -1,5 +1,5 @@
-import { helper } from "./index";
 import { Page } from "puppeteer";
+import { helper } from "./index";
 
 export class HelperPuppeteer {
   /**
@@ -29,6 +29,7 @@ export class HelperPuppeteer {
       await btn.click();
       await helper.waitForTimeout(1500);
       return true;
+      // eslint-disable-next-line no-unused-vars
     } catch (err: any) {
       console.error(
         `error clicking popup button. '${textElementOrChildren}' (element="${elementType}"). Continuing ...`

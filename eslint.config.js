@@ -42,7 +42,7 @@ export default [{
         sourceType: "commonjs",
 
         parserOptions: {
-            project: "./tsconfig.json",
+            project: "./tsconfig.base.json",
         },
     },
     files: [

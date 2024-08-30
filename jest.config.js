@@ -1,6 +1,6 @@
-module.exports = {
-  transform: { 
-    "^.+\\.ts?$": [ "ts-jest", {
+export default {
+  transform: {
+    "^.+\\.ts?$": ["ts-jest", {
       tsconfig: './tsconfig.base.json'
     }]
   },
