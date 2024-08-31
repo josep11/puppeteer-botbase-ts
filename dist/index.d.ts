@@ -1,4 +1,5 @@
 export * from "./custom-errors";
+export * from "./custom-error-functions";
 export * from "./helper-puppeteer";
 export * from "./helper";
 export * from "./savers/cookie-saver";

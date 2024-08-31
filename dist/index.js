@@ -15,6 +15,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./custom-errors"), exports);
+__exportStar(require("./custom-error-functions"), exports);
 __exportStar(require("./helper-puppeteer"), exports);
 __exportStar(require("./helper"), exports);
 __exportStar(require("./savers/cookie-saver"), exports);
