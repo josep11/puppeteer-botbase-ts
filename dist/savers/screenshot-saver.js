@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ScreenshotSaver = void 0;
 const path_1 = require("path");
-const helper_1 = require("../helper");
 const fs_1 = require("fs");
+const helper_1 = require("../helper");
 class ScreenshotSaver {
     constructor(screenshotBasepath) {
         if (!screenshotBasepath) {
@@ -18,7 +18,7 @@ class ScreenshotSaver {
         if (!type) {
             throw new Error("type is not defined");
         }
-        if (this.allowedTypes.indexOf(type) === -1) {
+        if (!this.allowedTypes.includes(type)) {
             throw new Error(`Type "${type}" not allowed.`);
         }
     }
@@ -26,6 +26,9 @@ class ScreenshotSaver {
     async saveScreenshot(imageBuffer, type, filename = "default") {
         //check for errors
         this._checkType(type);
+        if (imageBuffer instanceof Uint8Array) {
+            imageBuffer = Buffer.from(imageBuffer);
+        }
         const screenshotLocation = `${this.screenshotBasepath}/${helper_1.helper.dateFormatForLog()}_${filename}.${type}`;
         // console.log(`Saving screenshot "${filename}" at ${screenshotLocation}`);
         (0, fs_1.writeFileSync)(screenshotLocation, imageBuffer);

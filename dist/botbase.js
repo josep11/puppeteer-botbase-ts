@@ -6,10 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BotBase = void 0;
 // @ts-ignore
 const deepmerge_1 = __importDefault(require("deepmerge"));
-// eslint-disable-next-line no-unused-vars
-const index_1 = require("./index");
-const defaultConfig_1 = require("./defaultConfig");
 const path_1 = require("path");
+const defaultConfig_1 = require("./defaultConfig");
+const index_1 = require("./index");
 const { waitForTimeout } = index_1.helper;
 // Load the package json
 const packageJsonPath = (0, path_1.resolve)("package.json");
@@ -85,7 +84,6 @@ class BotBase {
      * Implementation required
      * @throws {LoginError} when not logged it
      */
-    // eslint-disable-next-line require-await
     async verifyIsLoggedIn() {
         if (!(await this.isLoggedIn())) {
             throw new index_1.LoginError("Texts/cssSelectors for isLoggedIn not found");
@@ -139,7 +137,7 @@ class BotBase {
             if (cookies && Object.keys(cookies).length) {
                 await this.loginWithSession(cookies).catch(async (error) => {
                     console.error(`Unable to login using session: ${error}`);
-                    if (error.name.indexOf("TimeoutError") !== -1) {
+                    if (error.name.includes("TimeoutError")) {
                         throw error;
                     }
                     await this.loginWithCredentials(username, password);
@@ -150,7 +148,7 @@ class BotBase {
             }
         }
         catch (error) {
-            if (error.name.indexOf("TimeoutError") !== -1) {
+            if (error.name.includes("TimeoutError")) {
                 throw new index_1.MyTimeoutError("Connexió lenta, no s'ha pogut fer login");
             }
             throw error;
@@ -245,7 +243,6 @@ class BotBase {
      * @returns {string}
      */
     appName() {
-        // eslint-disable-next-line no-useless-escape
         return "SHOULD OVERRIDE ¯_(ツ)_/¯ SHOULD OVERRIDE";
     }
 }

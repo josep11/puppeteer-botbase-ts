@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { PathLike } from "fs";
 declare class Helper {
     delay: (millis: number) => Promise<void>;
@@ -64,12 +63,6 @@ declare class Helper {
      * @returns {number}
      */
     countStringOccurrences(text: string, textToFind: string | RegExp): number;
-    /**
-     *
-     * @param {string} timeStr
-     * @returns {number|null}
-     */
-    extractHorasFromString(timeStr: string): number | null;
     getIp(): Promise<string>;
     /*****************************************/
     /*****************************************/

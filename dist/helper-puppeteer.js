@@ -22,6 +22,7 @@ class HelperPuppeteer {
             await btn.click();
             await index_1.helper.waitForTimeout(1500);
             return true;
+            // eslint-disable-next-line no-unused-vars
         }
         catch (err) {
             console.error(`error clicking popup button. '${textElementOrChildren}' (element="${elementType}"). Continuing ...`);

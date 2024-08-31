@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.objectArrayToCookieParamArray = exports.objectToCookieParam = exports.semiRandomiseViewPort = void 0;
+exports.semiRandomiseViewPort = semiRandomiseViewPort;
+exports.objectToCookieParam = objectToCookieParam;
+exports.objectArrayToCookieParamArray = objectArrayToCookieParamArray;
 const index_1 = require("./index");
 async function semiRandomiseViewPort(page, width, height) {
     await page.setViewport({
@@ -8,7 +10,6 @@ async function semiRandomiseViewPort(page, width, height) {
         height: height + index_1.helper.getRandBetween(1, 100),
     });
 }
-exports.semiRandomiseViewPort = semiRandomiseViewPort;
 function objectToCookieParam(obj) {
     const newObj = obj;
     // The name and value properties are mandatory
@@ -18,7 +19,6 @@ function objectToCookieParam(obj) {
     // If all properties are present, cast to CookieParam and return
     return newObj;
 }
-exports.objectToCookieParam = objectToCookieParam;
 function objectArrayToCookieParamArray(cookies) {
     const cookiesValidated = [];
     for (const cookie of cookies) {
@@ -26,4 +26,3 @@ function objectArrayToCookieParamArray(cookies) {
     }
     return cookiesValidated;
 }
-exports.objectArrayToCookieParamArray = objectArrayToCookieParamArray;
