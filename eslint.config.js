@@ -22,6 +22,7 @@ export default [{
         "**/build-cdn/",
         "**/jest.config.js",
         "**/jest.config.ts",
+        "**/eslint.config.js",
     ],
 }, ...compat.extends("eslint:recommended"), {
     plugins: {
@@ -42,7 +43,7 @@ export default [{
         sourceType: "commonjs",
 
         parserOptions: {
-            project: "./tsconfig.base.json",
+            project: "./tsconfig.dev.json",
         },
     },
     files: [
