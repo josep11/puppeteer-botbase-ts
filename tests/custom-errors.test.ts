@@ -1,4 +1,7 @@
-import { isInternetFailedError, isTimeoutError } from "../src";
+import {
+  isInternetFailedError,
+  isTimeoutError,
+} from "../src/custom-error-functions";
 
 describe("isInternetFailedError", () => {
   it("should return true if error message includes ERR_INTERNET_DISCONNECTED or ERR_PROXY_CONNECTION_FAILED", () => {
