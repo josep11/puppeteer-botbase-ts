@@ -43,9 +43,9 @@ export class HTMLMarkupChangedError extends Error {
   }
 }
 
-/*
- FUNCTIONS TO TRANSFORM/FIND ERRORS
- */
+// ------------------------------------
+//  FUNCTIONS TO TRANSFORM/FIND ERRORS
+// ------------------------------------
 
 export function isInternetFailedError(err: any): boolean {
   return Boolean(
