@@ -154,36 +154,6 @@ class Helper {
     return (text.match(re) || []).length;
   }
 
-  /**
-   *
-   * @param {string} timeStr
-   * @returns {number|null}
-   */
-  extractHorasFromString(timeStr: string): number | null {
-    // 23 horas
-    if (!timeStr) {
-      return null;
-    }
-
-    if (timeStr.indexOf("hora") !== -1) {
-      const m = timeStr.match(/\d+/);
-      if (!m) {
-        return null;
-      }
-      const horas = m[0];
-
-      return parseInt(horas);
-    } else {
-      if (timeStr.indexOf("seg") !== -1 || timeStr.indexOf("min") !== -1) {
-        return 0;
-      }
-      if (timeStr.indexOf("día") !== -1) {
-        return 25;
-      }
-      throw `FIXME: Helper.extractHorasFromString: En la string timeStr no s'ha trobat 'hora'. Input timeStr = ${timeStr}`;
-    }
-  }
-
   async getIp(): Promise<string> {
     const { stdout, stderr } = await exec(`curl checkip.amazonaws.com`);
     if (!stdout) {

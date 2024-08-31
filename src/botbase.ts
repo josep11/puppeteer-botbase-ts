@@ -190,7 +190,7 @@ export class BotBase {
       if (cookies && Object.keys(cookies).length) {
         await this.loginWithSession(cookies).catch(async (error) => {
           console.error(`Unable to login using session: ${error}`);
-          if (error.name.indexOf("TimeoutError") !== -1) {
+          if (error.name.includes("TimeoutError")) {
             throw error;
           }
           await this.loginWithCredentials(username, password);
@@ -199,7 +199,7 @@ export class BotBase {
         await this.loginWithCredentials(username, password);
       }
     } catch (error: any) {
-      if (error.name.indexOf("TimeoutError") !== -1) {
+      if (error.name.includes("TimeoutError")) {
         throw new MyTimeoutError("Connexió lenta, no s'ha pogut fer login");
       }
       throw error;
