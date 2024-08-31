@@ -1,14 +1,14 @@
 {
   "name": "puppeteer-botbase-ts",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
     "test": "NODE_ENV=test jest --testTimeout=50000 --runInBand tests/*",
-    "test:tdd": "NODE_ENV=test jest --bail --colors --detectOpenHandles --detectLeaks --runInBand",
-    "test:ci": "NODE_ENV=test jest --testPathIgnorePatterns \"tests/*botbase*\" \"tests/*helper-puppeteer*\" --detectLeaks --runInBand --reporters=default --reporters=jest-junit",
+    "test:tdd": "NODE_ENV=test jest --bail --colors --detectOpenHandles --runInBand",
+    "test:ci": "NODE_ENV=test jest --testPathIgnorePatterns \"tests/*botbase*\" \"tests/*helper-puppeteer*\" --detectLeaks --runInBand --reporters=default",
     "lint": "eslint src",
     "lint:fix": "npm run lint -- --fix",
     "prebuild": "rm -rf dist/*",
