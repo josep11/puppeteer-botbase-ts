@@ -1,21 +1,17 @@
-import { FlatCompat } from "@eslint/eslintrc";
-import js from "@eslint/js";
-import typescriptEslint from "@typescript-eslint/eslint-plugin";
-import tsParser from "@typescript-eslint/parser";
-import prettier from "eslint-plugin-prettier";
-import globals from "globals";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+const FlatCompat = require("@eslint/eslintrc").FlatCompat;
+const js = require("@eslint/js");
+const typescriptEslint = require("@typescript-eslint/eslint-plugin");
+const tsParser = require("@typescript-eslint/parser");
+const prettier = require("eslint-plugin-prettier");
+const globals = require("globals");
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
     baseDirectory: __dirname,
     recommendedConfig: js.configs.recommended,
     allConfig: js.configs.all
 });
 
-export default [{
+module.exports = [{
     ignores: [
         "**/node_modules/",
         "**/playground.js",
