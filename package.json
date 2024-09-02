@@ -1,10 +1,9 @@
 {
   "name": "puppeteer-botbase-ts",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "type": "module",
   "scripts": {
     "test": "NODE_ENV=test jest --testTimeout=50000 --runInBand tests/*",
     "test:tdd": "NODE_ENV=test jest --bail --colors --detectOpenHandles --runInBand",
