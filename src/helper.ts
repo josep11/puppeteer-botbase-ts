@@ -143,13 +143,7 @@ class Helper {
     return array.filter((_, index) => filterMap[index]);
   }
 
-  /**
-   *
-   * @param {string} text
-   * @param {string} textToFind
-   * @returns {number}
-   */
-  countStringOccurrences(text: string, textToFind: string | RegExp) {
+  countStringOccurrences(text: string, textToFind: string | RegExp): number {
     const re = new RegExp(textToFind, "gi");
     return (text.match(re) || []).length;
   }
