@@ -56,12 +56,6 @@ declare class Helper {
      * @returns
      */
     filterAsync<T>(array: T[], callbackfn: (value: T, index: number, array: T[]) => Promise<any>): Promise<T[]>;
-    /**
-     *
-     * @param {string} text
-     * @param {string} textToFind
-     * @returns {number}
-     */
     countStringOccurrences(text: string, textToFind: string | RegExp): number;
     getIp(): Promise<string>;
     /*****************************************/

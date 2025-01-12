@@ -117,12 +117,6 @@ class Helper {
         const filterMap = await this.mapAsync(array, callbackfn);
         return array.filter((_, index) => filterMap[index]);
     }
-    /**
-     *
-     * @param {string} text
-     * @param {string} textToFind
-     * @returns {number}
-     */
     countStringOccurrences(text, textToFind) {
         const re = new RegExp(textToFind, "gi");
         return (text.match(re) || []).length;
