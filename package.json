@@ -1,6 +1,6 @@
 {
   "name": "puppeteer-botbase-ts",
-  "version": "2.0.5",
+  "version": "3.0.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,25 +27,25 @@
   "dependencies": {
     "deepmerge": "^4.3.1",
     "luxon": "^3.5.0",
-    "user-agents": "^1.1.312"
+    "user-agents": "^1.1.417"
   },
   "optionalDependencies": {
-    "puppeteer-core": "^23.2.1"
+    "puppeteer-core": "^24.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.12",
+    "@types/jest": "^29.5.14",
     "@types/luxon": "^3.4.2",
-    "@types/node": "^22.5.1",
+    "@types/node": "^22.10.5",
     "@types/user-agents": "^1.0.4",
-    "@typescript-eslint/eslint-plugin": "^8.3.0",
-    "@typescript-eslint/parser": "^8.3.0",
-    "eslint": "^9.9.1",
+    "@typescript-eslint/eslint-plugin": "^8.19.1",
+    "@typescript-eslint/parser": "^8.19.1",
+    "eslint": "^9.18.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "globals": "^15.9.0",
+    "globals": "^15.14.0",
     "jest": "^29.7.0",
-    "puppeteer": "^23.2.1",
-    "puppeteer-core": "^23.2.1",
+    "puppeteer": "^24.0.0",
+    "puppeteer-core": "^24.0.0",
     "ts-jest": "^29.2.5",
-    "typescript": "^5.5.4"
+    "typescript": "^5.7.3"
   }
 }
