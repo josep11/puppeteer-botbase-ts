@@ -6,7 +6,7 @@ jobs:
     docker:
       # list of all images
       # https://circleci.com/developer/images/image/cimg/node
-      - image: cimg/node:20.10.0-browsers
+      - image: cimg/node:22.12.0-browsers
     steps:
       # tutorial followed: https://circleci.com/blog/functional-browser-testing/
       - checkout
