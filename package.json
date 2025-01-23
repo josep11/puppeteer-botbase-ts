@@ -27,7 +27,7 @@
   "dependencies": {
     "deepmerge": "^4.3.1",
     "luxon": "^3.5.0",
-    "user-agents": "^1.1.417"
+    "user-agents": "^1.1.428"
   },
   "optionalDependencies": {
     "puppeteer-core": "^24.0.0"
