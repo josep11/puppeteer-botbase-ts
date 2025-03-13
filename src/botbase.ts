@@ -154,6 +154,16 @@ export class BotBase {
   }
 
   /**
+   * @throws {Error}
+   */
+  checkBrowser(): Browser {
+    if (!this.browser) {
+      throw Error("browser is not initialised");
+    }
+    return this.browser;
+  }
+
+  /**
    * Tries to log in using cookies, or otherwise it throws error
    * It depends on implementation of verifyIsLoggedIn()
    */
