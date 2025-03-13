@@ -21,27 +21,30 @@ class CookieSaver {
      */
     // eslint-disable-next-line require-await
     async readCookies() {
+        let cookies = [];
         try {
-            const cookies = helper_1.helper.loadJson(this.cookiesFilePath);
+            const cookiesRaw = helper_1.helper.loadJson(this.cookiesFilePath);
             // Check if cookies is an array
-            if (!(cookies instanceof Array)) {
+            if (!(cookiesRaw instanceof Array)) {
                 // noinspection ExceptionCaughtLocallyJS
                 throw new Error("cookies is not an array");
             }
             // Check if all elements in the array are objects
-            for (const cookie of cookies) {
+            for (const cookie of cookiesRaw) {
                 if (typeof cookie !== "object") {
                     // noinspection ExceptionCaughtLocallyJS
                     throw new Error("Array contains non-object elements");
                 }
+                cookies.push(cookie);
             }
         }
         catch (err) {
             if (err.code !== "ENOENT") {
                 console.error("Reading cookie error. Defaulting to [] \n\n" + err);
             }
+            return [];
         }
-        return [];
+        return cookies;
     }
     // eslint-disable-next-line require-await
     async writeCookies(cookies) {
