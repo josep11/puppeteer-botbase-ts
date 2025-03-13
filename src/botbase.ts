@@ -164,7 +164,7 @@ export class BotBase {
     this.page = this.checkPage();
     console.log(`Logging into ${this.appName()} using cookies`);
 
-    await this.page.setCookie(...objectArrayToCookieParamArray(cookies));
+    await this.browser.setCookie(...objectArrayToCookieParamArray(cookies));
     await this.page.goto(this.mainUrl, { waitUntil: "networkidle2" });
     await waitForTimeout(helper.getRandBetween(1500, 4000));
 
