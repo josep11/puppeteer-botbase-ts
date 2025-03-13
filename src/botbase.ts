@@ -172,6 +172,8 @@ export class BotBase {
       throw new Error("loginWithSession: mainUrl param is not set");
     }
     this.page = this.checkPage();
+    this.browser = this.checkBrowser();
+
     console.log(`Logging into ${this.appName()} using cookies`);
 
     await this.browser.setCookie(...objectArrayToCookieParamArray(cookies));
