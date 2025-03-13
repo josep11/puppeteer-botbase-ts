@@ -1,4 +1,4 @@
-import { CookieParam, Page } from "puppeteer";
+import { CookieData, Page } from "puppeteer";
 import { helper } from "./index";
 
 export async function semiRandomiseViewPort(
@@ -12,24 +12,24 @@ export async function semiRandomiseViewPort(
   });
 }
 
-export function objectToCookieParam(obj: object): CookieParam {
-  const newObj = obj as Partial<CookieParam>;
+export function objectToCookieData(obj: object): CookieData {
+  const newObj = obj as Partial<CookieData>;
 
   // The name and value properties are mandatory
   if (!newObj.name || !newObj.value) {
     throw new Error("Missing mandatory properties");
   }
 
-  // If all properties are present, cast to CookieParam and return
-  return newObj as CookieParam;
+  // If all properties are present, cast to CookieData and return
+  return newObj as CookieData;
 }
 
 export function objectArrayToCookieParamArray(
   cookies: object[]
-): CookieParam[] {
-  const cookiesValidated = [];
+): CookieData[] {
+  const cookiesValidated: CookieData[] = [];
   for (const cookie of cookies) {
-    cookiesValidated.push(objectToCookieParam(cookie));
+    cookiesValidated.push(objectToCookieData(cookie));
   }
   return cookiesValidated;
 }

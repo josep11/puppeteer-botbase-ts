@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.semiRandomiseViewPort = semiRandomiseViewPort;
-exports.objectToCookieParam = objectToCookieParam;
+exports.objectToCookieData = objectToCookieData;
 exports.objectArrayToCookieParamArray = objectArrayToCookieParamArray;
 const index_1 = require("./index");
 async function semiRandomiseViewPort(page, width, height) {
@@ -10,19 +10,19 @@ async function semiRandomiseViewPort(page, width, height) {
         height: height + index_1.helper.getRandBetween(1, 100),
     });
 }
-function objectToCookieParam(obj) {
+function objectToCookieData(obj) {
     const newObj = obj;
     // The name and value properties are mandatory
     if (!newObj.name || !newObj.value) {
         throw new Error("Missing mandatory properties");
     }
-    // If all properties are present, cast to CookieParam and return
+    // If all properties are present, cast to CookieData and return
     return newObj;
 }
 function objectArrayToCookieParamArray(cookies) {
     const cookiesValidated = [];
     for (const cookie of cookies) {
-        cookiesValidated.push(objectToCookieParam(cookie));
+        cookiesValidated.push(objectToCookieData(cookie));
     }
     return cookiesValidated;
 }

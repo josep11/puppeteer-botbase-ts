@@ -38,6 +38,10 @@ export declare class BotBase {
      */
     checkPage(): Page;
     /**
+     * @throws {Error}
+     */
+    checkBrowser(): Browser;
+    /**
      * Tries to log in using cookies, or otherwise it throws error
      * It depends on implementation of verifyIsLoggedIn()
      */

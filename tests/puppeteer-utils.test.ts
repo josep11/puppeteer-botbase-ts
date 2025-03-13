@@ -1,10 +1,10 @@
-import { CookieParam } from "puppeteer";
+import { CookieData } from "puppeteer";
 
 import { objectArrayToCookieParamArray } from "../src";
 
 describe("objectArrayToCookieParamArray Function", () => {
   /* Test 01: Validate that the function correctly processes valid input. */
-  it("should correctly convert an array of cookie objects to an array of CookieParam objects", () => {
+  it("should correctly convert an array of cookie objects to an array of CookieData objects", () => {
     const testCookies = [
       {
         name: "cookie1",
@@ -33,7 +33,7 @@ describe("objectArrayToCookieParamArray Function", () => {
         secure: false,
         httpOnly: true,
       },
-    ] as CookieParam[];
+    ] as CookieData[];
 
     const actualResult = objectArrayToCookieParamArray(testCookies);
     expect(actualResult).toEqual(expectedResult);
@@ -42,7 +42,7 @@ describe("objectArrayToCookieParamArray Function", () => {
   /* Test 02: Validate the behavior of the function when passed an empty array. */
   it("should return an empty array when passed an empty array", () => {
     const testCookies = [] as object[];
-    const expectedResult = [] as CookieParam[];
+    const expectedResult = [] as CookieData[];
     const actualResult = objectArrayToCookieParamArray(testCookies);
     expect(actualResult).toEqual(expectedResult);
   });

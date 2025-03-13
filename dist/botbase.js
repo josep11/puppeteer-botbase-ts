@@ -106,6 +106,15 @@ class BotBase {
         return this.page;
     }
     /**
+     * @throws {Error}
+     */
+    checkBrowser() {
+        if (!this.browser) {
+            throw Error("browser is not initialised");
+        }
+        return this.browser;
+    }
+    /**
      * Tries to log in using cookies, or otherwise it throws error
      * It depends on implementation of verifyIsLoggedIn()
      */
@@ -114,8 +123,9 @@ class BotBase {
             throw new Error("loginWithSession: mainUrl param is not set");
         }
         this.page = this.checkPage();
+        this.browser = this.checkBrowser();
         console.log(`Logging into ${this.appName()} using cookies`);
-        await this.page.setCookie(...(0, index_1.objectArrayToCookieParamArray)(cookies));
+        await this.browser.setCookie(...(0, index_1.objectArrayToCookieParamArray)(cookies));
         await this.page.goto(this.mainUrl, { waitUntil: "networkidle2" });
         await waitForTimeout(index_1.helper.getRandBetween(1500, 4000));
         await this.verifyIsLoggedIn().catch(async (error) => {

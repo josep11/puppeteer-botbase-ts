@@ -55,7 +55,7 @@ prebuild:
 	npm run prebuild
 
 ## build the app
-build:
+build: prebuild
 	npm run build
 
 ## build the app in watch mode
