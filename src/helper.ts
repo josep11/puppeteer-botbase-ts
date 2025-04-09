@@ -149,9 +149,9 @@ class Helper {
   }
 
   async getIp(): Promise<string> {
-    const { stdout, stderr } = await exec(`curl checkip.amazonaws.com`);
+    const { stdout, stderr } = await exec(`curl ifconfig.me`);
     if (!stdout) {
-      console.error("IP no trobada a amazon");
+      console.error("IP no trobada");
       console.error(stderr);
       return "";
     }
