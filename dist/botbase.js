@@ -218,9 +218,7 @@ class BotBase {
         return this.screenshotSaver.saveScreenshot(imageBuffer, type, filename);
     }
     async logIP() {
-        this.page = this.checkPage();
-        await this.page.goto("https://checkip.amazonaws.com/");
-        const ip = await this.page.evaluate(() => { var _a; return ((_a = document.body.textContent) === null || _a === void 0 ? void 0 : _a.trim()) || ""; });
+        const ip = await index_1.helper.getIp();
         const ipFilePath = (0, path_1.join)(this.basePath, "/logs/ip.txt");
         await index_1.helper.writeIPToFile(ip, index_1.helper.dateFormatForLog(), ipFilePath);
         return ip;

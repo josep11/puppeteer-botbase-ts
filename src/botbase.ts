@@ -278,13 +278,7 @@ export class BotBase {
   }
 
   async logIP() {
-    this.page = this.checkPage();
-
-    await this.page.goto("https://checkip.amazonaws.com/");
-    const ip = await this.page.evaluate(
-      () => document.body.textContent?.trim() || ""
-    );
-
+    const ip = await helper.getIp();
     const ipFilePath = join(this.basePath, "/logs/ip.txt");
     await helper.writeIPToFile(ip, helper.dateFormatForLog(), ipFilePath);
     return ip;
