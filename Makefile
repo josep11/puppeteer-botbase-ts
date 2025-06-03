@@ -16,11 +16,8 @@ default: help
 
 include .make/*.mk
 
-install: node_modules
-
-node_modules: package.json
-	@NODE_ENV= $(PKG) install
-	@touch node_modules
+.PHONY: list test
+.PHONY: tag build prebuild
 
 _tag:
 	git tag ${TAG}
@@ -38,17 +35,18 @@ posttag:
 tag/delete:
 	git tag -d ${TAG}
 	git push --delete origin ${TAG}
-	
 
-.PHONY: list test
-.PHONY: tag 
-.PHONY: all install node_modules
+## Run npm audit
+npm/audit:
+	npm audit
+
+## Run npm audit fix (force)
+npm/audit-fix:
+	npm audit fix --force
 
 ## Run update deps for all of them
 update-deps:
 	ncu -u && npm i && npm test
-
-.PHONY: build prebuild
 
 ## prebuild scripts
 prebuild:
