@@ -262,7 +262,7 @@ export class BotBase {
   async takeScreenshot(filename: string) {
     const imageBuffer = await this.page?.screenshot({
       type: imgFormat,
-      quality: 80,
+      // quality: 80,
       // omitBackground: true,
       // fullPage: true
     });
