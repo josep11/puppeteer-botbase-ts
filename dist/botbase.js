@@ -10,6 +10,7 @@ const path_1 = require("path");
 const defaultConfig_1 = require("./defaultConfig");
 const index_1 = require("./index");
 const { waitForTimeout } = index_1.helper;
+const imgFormat = "png";
 // Load the package json
 const packageJsonPath = (0, path_1.resolve)("package.json");
 const pjson = index_1.helper.loadJson(packageJsonPath);
@@ -200,10 +201,9 @@ class BotBase {
      */
     async takeScreenshot(filename) {
         var _a;
-        const type = "jpeg";
         const imageBuffer = await ((_a = this.page) === null || _a === void 0 ? void 0 : _a.screenshot({
-            type,
-            quality: 80,
+            type: imgFormat,
+            // quality: 80,
             // omitBackground: true,
             // fullPage: true
         }));
@@ -215,7 +215,7 @@ class BotBase {
             console.error("cannot take screenshot");
             return "";
         }
-        return this.screenshotSaver.saveScreenshot(imageBuffer, type, filename);
+        return this.screenshotSaver.saveScreenshot(imageBuffer, imgFormat, filename);
     }
     async logIP() {
         const ip = await index_1.helper.getIp();
