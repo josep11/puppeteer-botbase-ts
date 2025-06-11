@@ -1,7 +1,7 @@
 // @ts-ignore
 import deepmerge from "deepmerge";
 
-import { Browser, Page } from "puppeteer";
+import { Browser, ImageFormat, Page } from "puppeteer";
 
 import { join, resolve } from "path";
 import { defaultConfig } from "./defaultConfig";
@@ -20,6 +20,7 @@ import BotBaseParams from "./types/BotBaseParams";
 
 const { waitForTimeout } = helper;
 
+const imgFormat: ImageFormat = "png";
 // Load the package json
 const packageJsonPath = resolve("package.json");
 const pjson = helper.loadJson(packageJsonPath);
@@ -259,10 +260,9 @@ export class BotBase {
    * @returns {Promise<string>} screenshotLocation full screenshot location
    */
   async takeScreenshot(filename: string) {
-    const type = "jpeg";
     const imageBuffer = await this.page?.screenshot({
-      type,
-      quality: 80,
+      type: imgFormat,
+      // quality: 80,
       // omitBackground: true,
       // fullPage: true
     });
@@ -274,7 +274,7 @@ export class BotBase {
       console.error("cannot take screenshot");
       return "";
     }
-    return this.screenshotSaver.saveScreenshot(imageBuffer, type, filename);
+    return this.screenshotSaver.saveScreenshot(imageBuffer, imgFormat, filename);
   }
 
   async logIP() {

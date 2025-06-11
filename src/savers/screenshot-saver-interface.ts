@@ -1,3 +1,5 @@
+import { ImageFormat } from "puppeteer";
+
 /* eslint-disable no-unused-vars */
 export interface ScreenshotSaverInterface {
   /**
@@ -5,7 +7,7 @@ export interface ScreenshotSaverInterface {
    */
   saveScreenshot(
     imageBuffer: Buffer | Uint8Array,
-    type: string,
+    type: ImageFormat,
     filename: string
   ): Promise<string>;
 }
