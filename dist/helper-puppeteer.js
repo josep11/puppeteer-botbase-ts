@@ -44,7 +44,8 @@ class HelperPuppeteer {
         }
         let clicked = false;
         try {
-            await btn.click();
+            // @ts-expect-error click does not ...
+            await btn.evaluate(b => b.click());
             clicked = true;
             // TODO: parametrise timeout as optional param defaulting to 1500
             await index_1.helper.waitForTimeout(1500);
