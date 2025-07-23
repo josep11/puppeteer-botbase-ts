@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HTMLMarkupChangedError = exports.NoInternetError = exports.NotImplementedError = exports.MyTimeoutError = exports.LoginError = void 0;
+exports.HTMLMarkupChangedError = exports.TargetBrowserClosedError = exports.NoInternetError = exports.NotImplementedError = exports.MyTimeoutError = exports.LoginError = void 0;
 class LoginError extends Error {
     constructor(message) {
         super(message);
@@ -33,6 +33,14 @@ class NoInternetError extends Error {
     }
 }
 exports.NoInternetError = NoInternetError;
+class TargetBrowserClosedError extends Error {
+    constructor(message = "The browser has been closed ❌") {
+        super(message);
+        Error.captureStackTrace(this, this.constructor);
+        this.name = this.constructor.name;
+    }
+}
+exports.TargetBrowserClosedError = TargetBrowserClosedError;
 class HTMLMarkupChangedError extends Error {
     constructor(message = "Markup: The page HTML changed. Need to fix it") {
         super(message);

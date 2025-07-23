@@ -34,6 +34,15 @@ export class NoInternetError extends Error {
   }
 }
 
+export class TargetBrowserClosedError extends Error {
+  constructor(message = "The browser has been closed ❌") {
+    super(message);
+    Error.captureStackTrace(this, this.constructor);
+
+    this.name = this.constructor.name;
+  }
+}
+
 export class HTMLMarkupChangedError extends Error {
   constructor(message = "Markup: The page HTML changed. Need to fix it") {
     super(message);

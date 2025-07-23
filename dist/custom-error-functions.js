@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.isInternetFailedError = isInternetFailedError;
 exports.isTimeoutError = isTimeoutError;
 exports.isInternetError = isInternetError;
+exports.isTargetBrowserClosedError = isTargetBrowserClosedError;
 function isInternetFailedError(err) {
     var _a, _b;
     return Boolean(((_a = err.message) === null || _a === void 0 ? void 0 : _a.includes("ERR_INTERNET_DISCONNECTED")) ||
@@ -22,4 +23,8 @@ function isTimeoutError(err) {
  */
 function isInternetError(err) {
     return isInternetFailedError(err) || isTimeoutError(err);
+}
+function isTargetBrowserClosedError(err) {
+    var _a;
+    return Boolean((_a = err.message) === null || _a === void 0 ? void 0 : _a.includes("Protocol error: Connection closed."));
 }
