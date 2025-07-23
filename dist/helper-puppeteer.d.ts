@@ -15,7 +15,7 @@ export declare class HelperPuppeteer {
      * @param {string?} elementType the element type. i.e: p, div, a, ...
      * @returns {Promise<boolean>} true if the element was clicked, false otherwise
      */
-    static closePopup(page: Page, elementText?: string, elementType?: string): Promise<boolean>;
+    static closePopup(page: Page, elementText?: string | null, elementType?: string | null): Promise<boolean>;
     /**
      * @param {Page} page Puppeteer page
      * @param {?string} elementText the text to find

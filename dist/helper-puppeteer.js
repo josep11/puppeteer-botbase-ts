@@ -44,8 +44,11 @@ class HelperPuppeteer {
         }
         let clicked = false;
         try {
-            // @ts-expect-error click does not ...
-            await btn.evaluate(b => b.click());
+            await Promise.all([
+                page.waitForNavigation(),
+                // @ts-expect-error click does not ...
+                await btn.evaluate(b => b.click()), // Click that causes navigation
+            ]);
             clicked = true;
             // TODO: parametrise timeout as optional param defaulting to 1500
             await index_1.helper.waitForTimeout(1500);
