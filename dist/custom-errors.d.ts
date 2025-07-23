@@ -10,6 +10,9 @@ export declare class NotImplementedError extends Error {
 export declare class NoInternetError extends Error {
     constructor(message?: string);
 }
+export declare class TargetBrowserClosedError extends Error {
+    constructor(message?: string);
+}
 export declare class HTMLMarkupChangedError extends Error {
     constructor(message?: string);
 }
