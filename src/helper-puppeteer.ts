@@ -65,7 +65,7 @@ export class HelperPuppeteer {
       await Promise.all([
         page.waitForNavigation(),
         // @ts-expect-error click does not ...
-        await btn.evaluate(b => b.click()), // Click that causes navigation
+        btn.evaluate(b => b.click()), // Click that causes navigation
       ]);
 
       clicked = true;
