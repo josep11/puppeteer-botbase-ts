@@ -47,9 +47,9 @@ export class HelperPuppeteer {
    */
   static async closePopup(
     page: Page,
-    elementText = "Aceptar y cerrar",
-    elementType = "*"
-  ) {
+    elementText: string | null = "Aceptar y cerrar",
+    elementType: string | null = "*"
+  ): Promise<boolean> {
     const xPathSel = `::-p-xpath(//${elementType}[contains(text(), "${elementText}")])`;
     const btn = await page.$(xPathSel);
 
@@ -62,8 +62,12 @@ export class HelperPuppeteer {
 
     let clicked = false;
     try {
-      // @ts-expect-error click does not ...
-      await btn.evaluate(b => b.click());
+      await Promise.all([
+        page.waitForNavigation(),
+        // @ts-expect-error click does not ...
+        btn.evaluate(b => b.click()), // Click that causes navigation
+      ]);
+
       clicked = true;
       // TODO: parametrise timeout as optional param defaulting to 1500
       await helper.waitForTimeout(1500);
