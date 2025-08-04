@@ -46,7 +46,7 @@ npm/audit-fix:
 
 ## Run update deps for all of them
 update-deps:
-	ncu -u -x @typescript-eslint/parser && npm i && npm test
+	ncu -u && npm i && npm test
 
 ## prebuild scripts
 prebuild:
