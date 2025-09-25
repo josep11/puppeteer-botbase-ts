@@ -59,3 +59,7 @@ build: prebuild
 ## build the app in watch mode
 watch:
 	npm run build-watch
+
+## Install browsers: chrome
+browsers/install:
+	npx puppeteer browsers install chrome
