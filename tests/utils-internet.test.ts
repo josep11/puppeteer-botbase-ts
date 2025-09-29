@@ -20,8 +20,12 @@ describe('isInternetAvailable', () => {
 
         mockReq = {
             on: jest.fn((event, callback) => {
-                if (event === 'error') errorCallback = callback;
-                if (event === 'abort') abortCallback = callback;
+                if (event === 'error') {
+                    errorCallback = callback;
+                }
+                if (event === 'abort') {
+                    abortCallback = callback;
+                }
                 return mockReq;
             }),
             end: jest.fn(),
