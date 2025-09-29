@@ -1,7 +1,7 @@
 interface Options {
-    authority?: string;
+    url?: string;
     timeout?: number;
-    options?: any;
+    headers?: Record<string, string>;
 }
 export declare function isInternetAvailable(options?: Options): Promise<boolean>;
 export {};

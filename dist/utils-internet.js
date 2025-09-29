@@ -1,25 +1,49 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isInternetAvailable = isInternetAvailable;
-const http2_1 = require("http2");
+const https_1 = require("https");
 function isInternetAvailable(options = {}) {
-    var _a;
-    const authority = (_a = options.authority) !== null && _a !== void 0 ? _a : "https://www.google.com";
+    var _a, _b;
+    const url = (_a = options.url) !== null && _a !== void 0 ? _a : 'https://www.google.com';
+    const timeout = (_b = options.timeout) !== null && _b !== void 0 ? _b : 5000;
     return new Promise((resolve) => {
-        const client = (0, http2_1.connect)(authority, options.options, () => {
-            resolve(true);
-            client.destroy();
-        });
-        if (typeof options.timeout === "number") {
-            client.setTimeout(options.timeout);
-            client.on("timeout", () => {
-                resolve(false);
-                client.destroy();
-            });
-        }
-        client.on("error", () => {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => {
+            controller.abort();
             resolve(false);
-            client.destroy();
+        }, timeout);
+        const cleanup = () => {
+            clearTimeout(timeoutId);
+            req.destroy();
+        };
+        const req = (0, https_1.request)(url, {
+            method: 'HEAD',
+            agent: new https_1.Agent({
+                keepAlive: false, // Don't keep connection alive
+                maxSockets: 1,
+                maxFreeSockets: 1,
+                timeout: timeout
+            }),
+            signal: controller.signal,
+            headers: options.headers
+        }, (response) => {
+            cleanup();
+            // Consider any 2xx/3xx status as success
+            const success = response.statusCode !== undefined &&
+                response.statusCode >= 200 &&
+                response.statusCode < 400;
+            // Drain the response body to free resources
+            response.resume();
+            resolve(success);
         });
+        req.on('error', () => {
+            cleanup();
+            resolve(false);
+        });
+        req.on('abort', () => {
+            cleanup();
+            resolve(false);
+        });
+        req.end();
     });
 }
