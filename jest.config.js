@@ -4,6 +4,10 @@ module.exports = {
   clearMocks: true,
   resetMocks: true,
   restoreMocks: true,
+  detectLeaks: true,
+  detectOpenHandles: true,
+  forceExit: true,
+  logHeapUsage: true,
   transform: {
     "^.+\\.ts?$": ["ts-jest", {
       tsconfig: './tsconfig.base.json'
