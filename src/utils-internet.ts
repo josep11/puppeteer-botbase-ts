@@ -1,35 +1,48 @@
-import { ClientHttp2Session, connect } from "http2";
+import { Agent, request } from "https";
 
 interface Options {
-  authority?: string;
+  url?: string;
   timeout?: number;
-  options?: any;
+  headers?: Record<string, string>;
 }
 
 export function isInternetAvailable(options: Options = {}): Promise<boolean> {
-  const authority: string = options.authority ?? "https://www.google.com";
+  const url = options.url ?? 'https://www.google.com';
+  const timeout = options.timeout ?? 5000;
 
   return new Promise((resolve) => {
-    const client: ClientHttp2Session = connect(
-      authority,
-      options.options,
-      () => {
-        resolve(true);
-        client.destroy();
-      }
-    );
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => {
+      controller.abort();
+    }, timeout);
 
-    if (typeof options.timeout === "number") {
-      client.setTimeout(options.timeout);
-      client.on("timeout", () => {
-        resolve(false);
-        client.destroy();
-      });
-    }
+    const req = request(url, {
+      method: 'HEAD',
+      agent: new Agent({ keepAlive: false }), // Don't keep connection alive
+      signal: controller.signal,
+      headers: options.headers
+    }, (response) => {
+      clearTimeout(timeoutId);
 
-    client.on("error", () => {
-      resolve(false);
-      client.destroy();
+      // Consider any 2xx/3xx status as success
+      const success = response.statusCode !== undefined &&
+        response.statusCode >= 200 &&
+        response.statusCode < 400;
+
+      // Drain the response body to free resources
+      response.resume();
+      resolve(success);
     });
+
+    req.on('error', () => {
+      clearTimeout(timeoutId);
+      resolve(false);
+    });
+
+    req.on('abort', () => {
+      resolve(false);
+    });
+
+    req.end();
   });
 }

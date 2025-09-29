@@ -1,10 +1,14 @@
 module.exports = {
+  preset: "ts-jest",
+  testEnvironment: "node",
+  clearMocks: true,
+  resetMocks: true,
+  restoreMocks: true,
   transform: {
     "^.+\\.ts?$": ["ts-jest", {
       tsconfig: './tsconfig.base.json'
     }]
   },
-  testEnvironment: "node",
   // reporters: [
   //   "default",
   //   [
