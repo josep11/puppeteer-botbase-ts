@@ -14,15 +14,26 @@ export function isInternetAvailable(options: Options = {}): Promise<boolean> {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => {
       controller.abort();
+      resolve(false);
     }, timeout);
+
+    const cleanup = () => {
+      clearTimeout(timeoutId);
+      req.destroy();
+    };
 
     const req = request(url, {
       method: 'HEAD',
-      agent: new Agent({ keepAlive: false }), // Don't keep connection alive
+      agent: new Agent({
+        keepAlive: false, // Don't keep connection alive
+        maxSockets: 1,
+        maxFreeSockets: 1,
+        timeout: timeout
+      }),
       signal: controller.signal,
       headers: options.headers
     }, (response) => {
-      clearTimeout(timeoutId);
+      cleanup();
 
       // Consider any 2xx/3xx status as success
       const success = response.statusCode !== undefined &&
@@ -35,11 +46,12 @@ export function isInternetAvailable(options: Options = {}): Promise<boolean> {
     });
 
     req.on('error', () => {
-      clearTimeout(timeoutId);
+      cleanup();
       resolve(false);
     });
 
     req.on('abort', () => {
+      cleanup();
       resolve(false);
     });
 
