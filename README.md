@@ -2,8 +2,7 @@
 
 ## Used by
 
-As of end of September 2025, it is used by the following projects:
-- milanuncios
+As of November 2025, it is used by the following projects:
 - reinicar router bot
 
 ## TODO
