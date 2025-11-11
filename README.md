@@ -2,8 +2,7 @@
 
 ## Used by
 
-As of November 2025, it is used by the following projects:
-- reinicar router bot
+As of November 2025, it not used.
 
 ## TODO
 
